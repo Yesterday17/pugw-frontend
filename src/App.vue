@@ -83,7 +83,7 @@
       </v-btn>
       <v-btn icon large>
         <v-avatar size="32px" item>
-          <v-img src="./assets/logo.svg" alt="pug"
+          <v-img src="./assets/nologin.png" alt="nologin"
         /></v-avatar>
       </v-btn>
     </v-app-bar>
@@ -101,9 +101,6 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import HelloWorld from "./components/HelloWorld.vue";
-
 export default {
   name: "App",
   props: {
@@ -113,34 +110,18 @@ export default {
     dialog: false,
     drawer: null,
     items: [
-      { icon: "mdi-contacts", text: "Contacts" },
-      { icon: "mdi-history", text: "Frequently contacted" },
-      { icon: "mdi-content-copy", text: "Duplicates" },
+      { icon: "mdi-home", text: "首页" },
       {
         icon: "mdi-chevron-up",
         "icon-alt": "mdi-chevron-down",
-        text: "Labels",
+        text: "Workflow",
         model: true,
-        children: [{ icon: "mdi-plus", text: "Create label" }]
+        children: [{ icon: "mdi-text-subject", text: "暂无" }]
       },
-      {
-        icon: "mdi-chevron-up",
-        "icon-alt": "mdi-chevron-down",
-        text: "More",
-        model: false,
-        children: [
-          { text: "Import" },
-          { text: "Export" },
-          { text: "Print" },
-          { text: "Undo changes" },
-          { text: "Other contacts" }
-        ]
-      },
-      { icon: "mdi-settings", text: "Settings" },
-      { icon: "mdi-message", text: "Send feedback" },
-      { icon: "mdi-help-circle", text: "Help" },
-      { icon: "mdi-cellphone-link", text: "App downloads" },
-      { icon: "mdi-keyboard", text: "Go to the old version" }
+      { icon: "mdi-settings", text: "设置" },
+      { icon: "mdi-information", text: "关于" },
+      { icon: "mdi-help-circle", text: "帮助" },
+      { icon: "mdi-cellphone-link", text: "App downloads" }
     ]
   })
 };
