@@ -56,8 +56,8 @@ YFgNf8BUAhbUyKzJi/O5c6sCAwEAAQ==
 
 有如下的返回状态：
 
-- `200`：注册成功，会 `Set-Cookies` 所需的凭据。
-- `400`：`username` 或 `password` 任一项不存在，或用户名与密码不对应。
+- `201`：注册成功，会 `Set-Cookies` 所需的凭据。
+- `400`：`username` 或 `password` 任一项不存在。
 
 ## DELETE /session
 
