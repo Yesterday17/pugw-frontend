@@ -3,6 +3,12 @@ import Vuex from "vuex";
 
 Vue.use(Vuex);
 
+interface UserInfo {
+  uuid: string;
+  name: string;
+  icon: string;
+}
+
 export default new Vuex.Store({
   state: {
     user: {
@@ -11,7 +17,13 @@ export default new Vuex.Store({
       icon: "",
     },
   },
-  mutations: {},
+  mutations: {
+    updateUserInfo(state, info: UserInfo) {
+      state.user.uuid = info.uuid;
+      state.user.name = info.name;
+      state.user.icon = info.icon;
+    },
+  },
   actions: {},
   modules: {},
 });

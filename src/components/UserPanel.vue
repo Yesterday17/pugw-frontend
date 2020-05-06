@@ -83,6 +83,7 @@ export default Vue.extend({
   mounted() {
     this.user = this.$store.state.user; // They share the same object now
     this.fetchKey();
+    this.updateUserInfo(false);
   },
   methods: {
     fetchKey() {
@@ -106,8 +107,33 @@ export default Vue.extend({
       }
     },
 
+    async updateUserInfo(showError = true) {
+      let info;
+      try {
+        info = await fetch(
+          process.env.VUE_APP_BACKEND + process.env.VUE_APP_USER,
+          {
+            method: process.env.VUE_APP_USER_INFO_METHOD,
+            credentials: "include"
+          }
+        ).then(r => r.json());
+      } catch (e) {
+        if (showError) {
+          this.$dialog.message.error(e.message, {
+            position: "bottom-right",
+            timeout: 3000
+          });
+        }
+        this.form.loading = false;
+        return;
+      }
+
+      // Update user data
+      this.$store.commit("updateUserInfo", info);
+    },
+
     async auth(login: boolean) {
-      // TODO: Finish
+      // TODO: Replace this.$dialog with own components
 
       this.form.loading = true;
       const exist = await this.keyExist();
@@ -136,16 +162,26 @@ export default Vue.extend({
       form.append("username", this.form.username);
       form.append("password", result);
 
-      const resp = await fetch(
-        process.env.VUE_APP_BACKEND + process.env.VUE_APP_SESSION,
-        {
-          credentials: "include",
-          method: login
-            ? process.env.VUE_APP_LOGIN_METHOD
-            : process.env.VUE_APP_REGISTER_METHOD,
-          body: form
-        }
-      );
+      let resp;
+      try {
+        resp = await fetch(
+          process.env.VUE_APP_BACKEND + process.env.VUE_APP_SESSION,
+          {
+            credentials: "include",
+            method: login
+              ? process.env.VUE_APP_LOGIN_METHOD
+              : process.env.VUE_APP_REGISTER_METHOD,
+            body: form
+          }
+        );
+      } catch (e) {
+        this.$dialog.message.error(e.message, {
+          position: "bottom-right",
+          timeout: 3000
+        });
+        this.form.loading = false;
+        return;
+      }
 
       if (resp.status !== 200) {
         const err = await resp.json();
@@ -158,6 +194,9 @@ export default Vue.extend({
       }
 
       // TODO: Refresh user status
+      this.form.password = ""; // not save password
+
+      await this.updateUserInfo();
       this.form.loading = false;
     }
   }
