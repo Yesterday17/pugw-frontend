@@ -50,10 +50,7 @@
         </v-list>
         <v-list v-else>
           <v-list-item>
-            <v-list-item-action>
-              <v-switch color="purple"></v-switch>
-            </v-list-item-action>
-            <v-list-item-title>TODO</v-list-item-title>
+            <v-btn text @click="logout()">注销</v-btn>
           </v-list-item>
         </v-list>
       </v-card>
@@ -193,11 +190,19 @@ export default Vue.extend({
         return;
       }
 
-      // TODO: Refresh user status
       this.form.password = ""; // not save password
 
       await this.updateUserInfo();
       this.form.loading = false;
+    },
+
+    async logout() {
+      await fetch(process.env.VUE_APP_BACKEND + process.env.VUE_APP_SESSION, {
+        method: process.env.VUE_APP_LOGOUT_METHOD,
+        credentials: "include"
+      });
+
+      this.$store.commit("logoutUser");
     }
   }
 });

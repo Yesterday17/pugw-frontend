@@ -23,6 +23,11 @@ export default new Vuex.Store({
       state.user.name = info.name;
       state.user.icon = info.icon;
     },
+    logoutUser(state) {
+      state.user.uuid = "";
+      state.user.name = "未登录";
+      state.user.icon = "";
+    },
   },
   actions: {},
   modules: {},
