@@ -81,11 +81,7 @@
       <v-btn icon>
         <v-icon>mdi-bell</v-icon>
       </v-btn>
-      <v-btn icon large>
-        <v-avatar size="32px" item>
-          <v-img src="./assets/nologin.png" alt="nologin"
-        /></v-avatar>
-      </v-btn>
+      <user-panel></user-panel>
     </v-app-bar>
     <v-content>
       <v-container class="fill-height" fluid>
@@ -101,8 +97,11 @@
 </template>
 
 <script lang="ts">
+import UserPanel from "@/components/UserPanel.vue";
+
 export default {
   name: "App",
+  components: { UserPanel },
   props: {
     source: String
   },
