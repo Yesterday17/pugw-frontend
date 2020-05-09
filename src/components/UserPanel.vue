@@ -24,7 +24,10 @@
           </v-list-item>
         </v-list>
         <v-divider></v-divider>
-        <v-list v-if="form.loading" class="text-center with-padding">
+        <v-list
+          v-if="form.loading && !this.dialog"
+          class="text-center with-padding"
+        >
           <v-progress-circular
             indeterminate
             color="primary"
@@ -44,7 +47,85 @@
           <v-card-actions>
             <v-spacer></v-spacer>
 
-            <v-btn text @click="auth(false)">注册</v-btn>
+            <v-dialog v-model="dialog" persistent width="600px">
+              <template v-slot:activator="{ on }">
+                <v-btn text v-on="on">注册</v-btn>
+              </template>
+              <v-card v-if="form.loading">
+                <v-card-title>
+                  <span class="headline">注册中...</span>
+                </v-card-title>
+                <div class="text-center with-padding">
+                  <v-progress-circular
+                    indeterminate
+                    color="primary"
+                  ></v-progress-circular>
+                </div>
+              </v-card>
+              <v-card v-else>
+                <v-card-title>
+                  <span class="headline">用户注册</span>
+                </v-card-title>
+                <v-card-text>
+                  <v-container>
+                    <v-row>
+                      <v-col cols="12">
+                        <v-text-field
+                          label="用户名*"
+                          required
+                          v-model="form.register.username"
+                        ></v-text-field>
+                      </v-col>
+                      <v-col cols="12">
+                        <v-text-field
+                          label="密码*"
+                          type="password"
+                          required
+                          v-model="form.register.password"
+                        ></v-text-field>
+                      </v-col>
+                      <v-col cols="12" sm="6" md="6">
+                        <v-text-field
+                          label="昵称"
+                          hint="日常显示的用户名称"
+                          v-model="form.register.name"
+                        ></v-text-field>
+                      </v-col>
+                      <v-col cols="12" sm="6" md="6">
+                        <v-text-field
+                          label="头像"
+                          hint="头像链接"
+                          v-model="form.register.icon"
+                        ></v-text-field>
+                      </v-col>
+                      <v-col cols="12">
+                        <v-text-field
+                          label="邮箱"
+                          required
+                          v-model="form.register.email"
+                        ></v-text-field>
+                      </v-col>
+                    </v-row>
+                  </v-container>
+                  <small>*代表必填项</small>
+                </v-card-text>
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+                  <v-btn
+                    color="blue darken-1"
+                    text
+                    @click="
+                      clear();
+                      dialog = false;
+                    "
+                    >取消</v-btn
+                  >
+                  <v-btn color="blue darken-1" text @click="auth(false)"
+                    >注册</v-btn
+                  >
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
             <v-btn color="primary" text @click="auth(true)">登录</v-btn>
           </v-card-actions>
         </v-list>
@@ -66,9 +147,17 @@ const encrypt = new JSEncrypt({});
 
 export default Vue.extend({
   data: () => ({
+    dialog: false,
     form: {
       username: "",
       password: "",
+      register: {
+        username: "",
+        password: "",
+        name: "",
+        icon: "",
+        email: ""
+      },
       loading: false
     },
     key: {
@@ -89,6 +178,11 @@ export default Vue.extend({
     this.updateUserInfo(false);
   },
   methods: {
+    clear() {
+      this.form.username = "";
+      this.form.password = "";
+    },
+
     fetchKey() {
       // Fetch RSA Public Key
       this.key.promise = fetch(
@@ -151,7 +245,9 @@ export default Vue.extend({
 
       // Encrypt password
       encrypt.setPublicKey(this.key.key);
-      const result = encrypt.encrypt(this.form.password);
+      const result = encrypt.encrypt(
+        login ? this.form.password : this.form.register.password
+      );
       if (!result) {
         this.$dialog.message.error("密码加密失败。", {
           position: "bottom-right",
@@ -162,8 +258,16 @@ export default Vue.extend({
       }
 
       const form = new FormData();
-      form.append("username", this.form.username);
-      form.append("password", result);
+      if (login) {
+        form.append("username", this.form.username);
+        form.append("password", result);
+      } else {
+        form.append("username", this.form.register.username);
+        form.append("password", result);
+        form.append("name", this.form.register.name);
+        form.append("icon", this.form.register.icon);
+        form.append("email", this.form.register.email);
+      }
 
       let resp;
       try {
@@ -186,7 +290,7 @@ export default Vue.extend({
         return;
       }
 
-      if (resp.status !== 200) {
+      if (resp.status !== 201) {
         const err = await resp.json();
         this.$dialog.message.error(err.message, {
           position: "bottom-right",
