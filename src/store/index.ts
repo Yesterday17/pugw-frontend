@@ -5,28 +5,40 @@ Vue.use(Vuex);
 
 interface UserInfo {
   uuid: string;
-  name: string;
-  icon: string;
+  username: string;
+  level: number;
+
+  settings: {
+    account: {
+      name: string;
+      email: string;
+      icon: string;
+    };
+  };
 }
 
 export default new Vuex.Store({
   state: {
     user: {
-      uuid: "",
-      name: "未登录",
-      icon: "",
+      info: {
+        uuid: "",
+        username: "未登录",
+        level: 0,
+      },
+      account: {},
     },
   },
   mutations: {
     updateUserInfo(state, info: UserInfo) {
-      state.user.uuid = info.uuid;
-      state.user.name = info.name;
-      state.user.icon = info.icon;
+      state.user.info = info;
+      state.user.account = info.setting.account;
     },
     logoutUser(state) {
-      state.user.uuid = "";
-      state.user.name = "未登录";
-      state.user.icon = "";
+      state.user.info = {
+        uuid: "",
+        username: "未登录",
+        level: 0,
+      };
     },
   },
   actions: {},

@@ -1,10 +1,10 @@
 <template>
   <div class="text-center">
     <v-menu left offset-x :close-on-content-click="false" :nudge-width="200">
-      <template v-slot:activator="{ on }" v-bind="user">
+      <template v-slot:activator="{ on }" v-bind="account">
         <v-btn icon large v-on="on">
           <v-avatar size="32px" item>
-            <v-img :src="user.icon || '/img/nologin.png'" alt="nologin" />
+            <v-img :src="account.icon || '/img/nologin.png'" alt="nologin" />
           </v-avatar>
         </v-btn>
       </template>
@@ -13,12 +13,12 @@
           <v-list-item>
             <v-list-item-avatar>
               <v-img
-                :src="this.user.icon || '/img/nologin.png'"
+                :src="this.account.icon || '/img/nologin.png'"
                 alt="nologin"
               />
             </v-list-item-avatar>
             <v-list-item-content>
-              <v-list-item-title>{{ this.user.name }}</v-list-item-title>
+              <v-list-item-title>{{ this.account.name }}</v-list-item-title>
               <v-list-item-subtitle></v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
@@ -30,7 +30,7 @@
             color="primary"
           ></v-progress-circular
         ></v-list>
-        <v-list v-else-if="user.uuid === ''" dense>
+        <v-list v-else-if="info.uuid === ''" dense>
           <v-list-item>
             <v-text-field label="用户名" v-model="form.username"></v-text-field>
           </v-list-item>
@@ -66,7 +66,6 @@ const encrypt = new JSEncrypt({});
 
 export default Vue.extend({
   data: () => ({
-    user: {},
     form: {
       username: "",
       password: "",
@@ -77,8 +76,15 @@ export default Vue.extend({
       key: ""
     }
   }),
+  computed: {
+    info() {
+      return this.$store.state.user.info;
+    },
+    account() {
+      return this.$store.state.user.account;
+    }
+  },
   mounted() {
-    this.user = this.$store.state.user; // They share the same object now
     this.fetchKey();
     this.updateUserInfo(false);
   },
