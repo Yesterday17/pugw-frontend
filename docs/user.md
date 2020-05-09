@@ -34,8 +34,8 @@ lang: zh-CN
 ```json
 {
   "uuid": "string",
-  "name": "昵称",
-  "icon": "头像链接"
+  "username": "昵称",
+  "level": 0
 }
 ```
 
