@@ -33,9 +33,16 @@ lang: zh-CN
 
 ```json
 {
-  "uuid": "string",
-  "username": "昵称",
-  "level": 0
+  "uuid": "cb5af947-ab38-4f4b-9a13-d807b3a784cc",
+  "username": "yesterday17",
+  "level": 0,
+  "setting": {
+    "account": {
+      "name": "某昨",
+      "email": "mmf@mmf.moe",
+      "icon": ""
+    }
+  }
 }
 ```
 
@@ -49,11 +56,10 @@ lang: zh-CN
 
 ```json
 {
-  "category1": {
-    "key": "value"
-  },
-  "category2": {
-    "key": "value"
+  "account": {
+    "name": "某昨",
+    "email": "mmf@mmf.moe",
+    "icon": ""
   }
 }
 ```
@@ -74,8 +80,11 @@ lang: zh-CN
 
 修改用户全局设置，接收 `multipart/form-data`。有如下字段：
 
-- `category`：配置的分类
-- `data`：配置的内容，是通过 `JSON.parse` 处理后的字符串，格式和上文获取的用户配置一致。
+
+| 参数名   | 类型   | 必须 | 描述                                                                         | 默认值 |
+| -------- | ------ | ---- | ---------------------------------------------------------------------------- | ------ |
+| category | string | 否   | 修改的分类                                                                   | -      |
+| data     | string | 否   | 修改的内容，是通过 `JSON.parse` 处理后的字符串，格式和上文获取的用户配置一致 | -      |
 
 有如下返回状态：
 

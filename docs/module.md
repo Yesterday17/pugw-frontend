@@ -5,7 +5,7 @@ lang: zh-CN
 
 # 模块与管道管理
 
-::: danger 实现进度
+::: warning 实现进度
 - `pug-backend`：90%
 - `pugw-frontend`：0%
 :::

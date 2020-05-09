@@ -51,8 +51,13 @@ YFgNf8BUAhbUyKzJi/O5c6sCAwEAAQ==
 
 用户注册，接收 `multipart/form-data`。有如下字段：
 
-- `username`：用户名
-- `password`：经过公钥加密后的密码。
+| 参数名   | 类型   | 必须 | 描述                         | 默认值 |
+| -------- | ------ | ---- | ---------------------------- | ------ |
+| username | string | 是   | 注册用户的用户名             | -      |
+| password | string | 是   | 注册用户经过公钥加密后的密码 | -      |
+| name     | string | 否   | 注册用户的昵称               | -      |
+| email    | string | 否   | 注册用户的邮箱               | -      |
+| icon     | string | 否   | 注册用户的头像链接           | -      |
 
 有如下的返回状态：
 
