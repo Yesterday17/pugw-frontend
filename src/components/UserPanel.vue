@@ -290,7 +290,7 @@ export default Vue.extend({
         return;
       }
 
-      if (resp.status !== 201) {
+      if (resp.status !== 201 - Number(login)) {
         const err = await resp.json();
         this.$dialog.message.error(err.message, {
           position: "bottom-right",
