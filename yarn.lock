@@ -9790,6 +9790,11 @@ vue-loader@^15.8.3:
     vue-hot-reload-api "^2.3.0"
     vue-style-loader "^4.1.0"
 
+vue-promised@^1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/vue-promised/-/vue-promised-1.2.2.tgz#ee233f336820037ab01dde518dea3f91e991b9ea"
+  integrity sha512-f0uy3bOapMoKiVCRyseX3KyxWVvKL7xFccAyMFVsfc1oUaoIj0cjh9SuZQxuW8qanAgA7l+pjx7SGC8Rrm+z/Q==
+
 vue-property-decorator@^8.3.0:
   version "8.4.1"
   resolved "https://registry.npm.taobao.org/vue-property-decorator/download/vue-property-decorator-8.4.1.tgz#fd8045b8678e1348fed57f9149279e00e404ed38"
@@ -9880,6 +9885,7 @@ vuepress@^1.4.1:
     envinfo "^7.2.0"
     opencollective-postinstall "^2.0.2"
     update-notifier "^4.0.0"
+
 vuetify-dialog@^2.0.2:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/vuetify-dialog/-/vuetify-dialog-2.0.2.tgz#1bc0db21988e085adc6bf32c0e9c902b739bebf0"

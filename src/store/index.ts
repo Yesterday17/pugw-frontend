@@ -27,6 +27,7 @@ export default new Vuex.Store({
       },
       account: {},
     },
+    pipelines: [] as Array<any>,
   },
   mutations: {
     updateUserInfo(state, info: UserInfo) {
@@ -39,6 +40,10 @@ export default new Vuex.Store({
         username: "未登录",
         level: 0,
       };
+    },
+    updatePipeline(state, ppl: Array<any>) {
+      state.pipelines.forEach(() => state.pipelines.pop());
+      state.pipelines.push(...ppl);
     },
   },
   actions: {},
