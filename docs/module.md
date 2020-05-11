@@ -1,9 +1,9 @@
 ---
-title: 模块与管道管理
+title: Module 与 Pipe 管理
 lang: zh-CN
 ---
 
-# 模块与管道管理
+# Module 与 Pipe 管理
 
 ::: warning 实现进度
 - `pug-backend`：90%
@@ -31,9 +31,9 @@ lang: zh-CN
 ]
 ```
 
-## GET /module/:id
+## GET /module/:module
 
-获取模块的详细属性，需指定模块 `id`。
+获取指定模块的详细属性。
 
 有如下的返回状态：           
 
