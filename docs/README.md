@@ -8,13 +8,17 @@
 
 `pugw-frontend` 对接的是 `pug-backend`，后者为对接 PUG 的后端实现。
 
+## 约定
+
+在本文档中，一旦出现参数列表，则对于 `GET`、`DELETE` 等标准中不含 `body` 的方法而言是 `Param`；对于 `POST`、`PUT` 等能够携带 `body` 的方法，则是 `multipart/form-data` 类型的 `body`。
+
 ## 部署
 
 ::: warning
 目前 `pug-backend` 接口设计尚未稳定。
 :::
 
-如果你有一台 VPS，那你就可以很轻松地完成 `pugw-frontend` + `pug-backend` 的部署。
+只要你有一台 VPS，你就可以很轻松地完成 `pugw-frontend` + `pug-backend` 的部署。
 
 首先，你需要从 `pug-backend` 仓库中下载最新的构建，并将其上传到你的服务器上，按对应仓库的教程进行配置。
 
