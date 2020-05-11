@@ -13,4 +13,6 @@ module.exports = {
       "/workflow",
     ],
   },
+
+  base: "/pugw-frontend/",
 };
