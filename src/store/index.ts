@@ -8,7 +8,7 @@ interface UserInfo {
   username: string;
   level: number;
 
-  settings: {
+  setting: {
     account: {
       name: string;
       email: string;

@@ -42,7 +42,7 @@
               </v-list-item-content>
             </v-list-item>
           </v-list-group>
-          <v-list-item v-else :key="item.text" link>
+          <v-list-item v-else :key="item.text" link :to="item.link">
             <v-list-item-action>
               <v-icon>{{ item.icon }}</v-icon>
             </v-list-item-action>
@@ -84,15 +84,8 @@
       <user-panel></user-panel>
     </v-app-bar>
     <v-content>
-      <v-container class="fill-height" fluid>
-        <v-row align="center" justify="center">
-          <router-view></router-view>
-        </v-row>
-      </v-container>
+      <router-view></router-view>
     </v-content>
-    <v-btn bottom color="pink" dark fab fixed right>
-      <v-icon>mdi-plus</v-icon>
-    </v-btn>
   </v-app>
 </template>
 
@@ -109,18 +102,22 @@ export default {
     dialog: false,
     drawer: null,
     items: [
-      { icon: "mdi-home", text: "首页" },
+      { icon: "mdi-home", text: "首页", link: "/" },
       {
         icon: "mdi-chevron-up",
         "icon-alt": "mdi-chevron-down",
         text: "Workflow",
-        model: true,
+        model: false,
         children: [{ icon: "mdi-text-subject", text: "暂无" }]
       },
-      { icon: "mdi-settings", text: "设置" },
-      { icon: "mdi-information", text: "关于" },
-      { icon: "mdi-help-circle", text: "帮助" },
-      { icon: "mdi-cellphone-link", text: "App downloads" }
+      { icon: "mdi-settings", text: "设置", link: "/settings" },
+      { icon: "mdi-information", text: "关于", link: "/about" },
+      { icon: "mdi-help-circle", text: "帮助", link: "/help" },
+      {
+        icon: "mdi-github-circle",
+        text: "Project PUG",
+        link: "https://github.com/Yesterday17/pug"
+      }
     ]
   })
 };
