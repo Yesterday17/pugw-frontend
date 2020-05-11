@@ -7,9 +7,13 @@ import vuetify from "./plugins/vuetify";
 
 Vue.config.productionTip = false;
 
+import VuetifyDialog from "vuetify-dialog";
+import "vuetify-dialog/dist/vuetify-dialog.css";
+Vue.use(VuetifyDialog);
+
 new Vue({
   router,
   store,
   vuetify,
-  render: h => h(App)
+  render: (h) => h(App),
 }).$mount("#app");
