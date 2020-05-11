@@ -5,7 +5,9 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs"
   },
   "dependencies": {
     "@mdi/font": "^3.6.95",
@@ -42,6 +44,7 @@
     "typescript": "~3.7.5",
     "vue-cli-plugin-vuetify": "^2.0.5",
     "vue-template-compiler": "^2.6.11",
+    "vuepress": "^1.4.1",
     "vuetify-loader": "^1.3.0"
   }
 }
