@@ -5,9 +5,9 @@ lang: zh-CN
 
 # 用户信息
 
-::: warning 实现进度
+::: tip 实现进度
 - `pug-backend`：100%
-- `pugw-frontend`：0%
+- `pugw-frontend`：100%
 :::
 
 `pug-backend` 提供简单的用户信息管理功能。
