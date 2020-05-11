@@ -3,6 +3,14 @@ module.exports = {
   description: "Frontend site in PUG project.",
 
   themeConfig: {
-    sidebar: ["/", "/session", "/user", "/module", "/pipes", "/pipeline"],
+    sidebar: [
+      "/",
+      "/session",
+      "/user",
+      "/module",
+      "/pipes",
+      "/pipeline",
+      "/workflow",
+    ],
   },
 };

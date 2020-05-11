@@ -143,4 +143,4 @@ Pipeline 是 PUG 的用户态基本复用单元，通过对管道进行拼接，
 当前版本未计划实现该方法
 :::
 
-删除对应 `id` 的 Pipeline
+删除对应 `id` 的 Pipeline。
